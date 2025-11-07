@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RitaGo Leaderboard — Upload, Append & Recalculate</title>
+<style>
+  :root { --border:#e5e7eb; --muted:#6b7280; --bg:#ffffff; --bg2:#fafafa; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; background:#fff; }
+  h1 { margin: 0 0 12px; font-size: 20px; }
+  h2 { font-size: 16px; margin: 0 0 8px; }
+  .row { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .row { grid-template-columns: 1fr 1fr; } }
+  .card { border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: #fff; }
+  .controls { display: grid; grid-template-columns: repeat(6, minmax(0, auto)); gap: 12px; align-items: end; }
+  .controls > div { min-width: 180px; }
+  label { font-size: 13px; color: var(--muted); display:block; margin-bottom: 6px; }
+  input[type="number"], input[type="text"] { width: 140px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; }
+  input[type="file"] { padding: 6px; }
+  .btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; }
+  .btn:hover { background: var(--bg2); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align:left; padding:10px; border-bottom:1px solid #eee; font-size:14px; vertical-align: top; }
+  th { background: var(--bg2); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid var(--border); }
+  .pill.bug { background:#fff1f2; }
+  .pill.enh { background:#f0f9ff; }
+  .hint { font-size:12px; color:var(--muted); }
+  .toolbar { display:flex; gap:8px; flex-wrap: wrap; align-items:center; }
+</style>
+</head>
+<body>
+  <h1>RitaGo Leaderboard — Upload, Append & Recalculate</h1>
+  <div class="card" style="margin-bottom:16px;">
+    <div class="controls">
+      <div>
+        <label for="fileInput">Detailed issues CSV</label>
+        <input id="fileInput" type="file" accept=".csv" />
+        <div class="hint">Columns (case-insensitive): Reporter, Type, Issue Summary</div>
+      </div>
+      <div>
+        <label>Upload mode</label>
+        <div class="toolbar">
+          <label style="display:flex;align-items:center;gap:6px;">
+            <input id="appendMode" type="checkbox" />
+            Append (merge) instead of replace
+          </label>
+        </div>
+        <div class="hint">If checked, new rows are added and de-duplicated by Reporter+Type+Issue Summary.</div>
+      </div>
+      <div>
+        <label>Bug weight</label>
+        <input id="bugWeight" type="number" value="3" min="0" step="1" />
+      </div>
+      <div>
+        <label>Enhancement weight</label>
+        <input id="enhWeight" type="number" value="1" min="0" step="1" />
+      </div>
+      <div>
+        <label>Filter</label>
+        <input id="searchBox" type="text" placeholder="Search reporter or text..." />
+      </div>
+      <div>
+        <label>Exports</label>
+        <div class="toolbar">
+          <button id="exportLb" class="btn">Export leaderboard CSV</button>
+          <button id="exportIssues" class="btn">Export filtered issues CSV</button>
+        </div>
+      </div>
+    </div>
+    <div class="hint" style="margin-top:8px;">
+      Tip: Use <b>Append</b> to add new feedback without losing the current set. Click a reporter to see their issues.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h2>Leaderboard</h2>
+      <div id="leaderboard"></div>
+    </div>
+    <div class="card">
+      <h2>Issues</h2>
+      <div id="issues"></div>
+    </div>
+  </div>
+
+<script>
+// Starter set (empty by default — load your CSV to populate)
+let issues = [];
+
+// CSV parser (handles quotes, commas, CRLF)
+function parseCSV(text) {
+  const rows = [];
+  let cur = [], field = '', inQuotes = false;
+  for (let i=0; i<text.length; i++) {
+    const c = text[i], n=text[i+1];
+    if (inQuotes) {
+      if (c === '"') {
+        if (n === '"') { field += '"'; i++; } else { inQuotes = false; }
+      } else { field += c; }
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { cur.push(field); field=''; }
+      else if (c === '\n' || c === '\r') {
+        if (field !== '' || cur.length) { cur.push(field); rows.push(cur); cur=[]; field=''; }
+        if (c==='\r' && n==='\n') i++;
+      } else { field += c; }
+    }
+  }
+  if (field !== '' || cur.length) { cur.push(field); rows.push(cur); }
+  return rows.filter(r => r.some(x => (x||'').trim()!==''));
+}
+
+function toRecords(rows) {
+  if (!rows.length) return [];
+  const header = rows[0].map(h => (h||'').trim());
+  const map = {}; header.forEach((h,i) => map[h.toLowerCase()] = i);
+  const iRep = map["reporter"];
+  const iTyp = map["type"];
+  const iSum = map["issue summary"] ?? map["issuesummary"] ?? map["issue"] ?? map["summary"];
+  if (iRep==null || iTyp==null || iSum==null) {
+    alert("Missing required columns: Reporter, Type, Issue Summary");
+    return [];
+  }
+  const out = [];
+  for (let r=1; r<rows.length; r++) {
+    const row = rows[r];
+    const Reporter = (row[iRep]||'').trim();
+    const Type = (row[iTyp]||'').trim();
+    const IssueSummary = (row[iSum]||'').trim();
+    if (!Reporter && !Type && !IssueSummary) continue;
+    out.push({ Reporter, Type, IssueSummary });
+  }
+  return out;
+}
+
+function isBug(t) { return (t||'').toLowerCase().includes('bug'); }
+
+function computeLeaderboard(bugW, enhW, q='') {
+  const pts = new Map();
+  const filter = (q||'').toLowerCase();
+  for (const it of issues) {
+    const hay = (it.Reporter + " " + it.Type + " " + it.IssueSummary).toLowerCase();
+    if (filter && !hay.includes(filter)) continue;
+    const p = isBug(it.Type) ? bugW : enhW;
+    pts.set(it.Reporter, (pts.get(it.Reporter)||0) + p);
+  }
+  const rows = Array.from(pts.entries()).map(([Reporter, Points]) => ({Reporter, Points}));
+  rows.sort((a,b) => b.Points - a.Points || a.Reporter.localeCompare(b.Reporter));
+  return rows;
+}
+
+function renderLeaderboard() {
+  const bugW = parseInt(document.getElementById('bugWeight').value||'3',10);
+  const enhW = parseInt(document.getElementById('enhWeight').value||'1',10);
+  const q = document.getElementById('searchBox').value||'';
+  const rows = computeLeaderboard(bugW, enhW, q);
+
+  // counts
+  const counts = new Map();
+  for (const it of issues) {
+    const hay = (it.Reporter + " " + it.Type + " " + it.IssueSummary).toLowerCase();
+    if (q && !hay.includes(q)) continue;
+    const c = counts.get(it.Reporter) || {bugs:0, enh:0};
+    if (isBug(it.Type)) c.bugs++; else c.enh++;
+    counts.set(it.Reporter, c);
+  }
+
+  const box = document.getElementById('leaderboard');
+  box.innerHTML = "";
+  const table = document.createElement('table');
+  table.innerHTML = `<thead><tr>
+    <th style="width:48px;">#</th><th>Reporter</th><th style="width:100px;">Points</th><th style="width:160px;">Breakdown</th>
+  </tr></thead>`;
+  const tb = document.createElement('tbody');
+
+  rows.forEach((r,i) => {
+    const c = counts.get(r.Reporter) || {bugs:0, enh:0};
+    const tr = document.createElement('tr');
+    tr.style.cursor = "pointer";
+    tr.innerHTML = `<td>${i+1}</td>
+      <td><strong>${r.Reporter}</strong></td>
+      <td><strong>${r.Points}</strong></td>
+      <td><span class="pill bug">${c.bugs} bugs</span> &nbsp; <span class="pill enh">${c.enh} enh</span></td>`;
+    tr.addEventListener('click', () => showIssuesFor(r.Reporter));
+    tb.appendChild(tr);
+  });
+
+  table.appendChild(tb);
+  box.appendChild(table);
+}
+
+function showIssuesFor(name) {
+  const bugW = parseInt(document.getElementById('bugWeight').value||'3',10);
+  const enhW = parseInt(document.getElementById('enhWeight').value||'1',10);
+  const q = document.getElementById('searchBox').value||'';
+
+  const list = issues.filter(it => it.Reporter === name).filter(it => {
+    const hay = (it.Reporter + " " + it.Type + " " + it.IssueSummary).toLowerCase();
+    return !q || hay.includes(q.toLowerCase());
+  });
+
+  const box = document.getElementById('issues');
+  box.innerHTML = "";
+  const table = document.createElement('table');
+  table.innerHTML = `<thead><tr><th>Reporter</th><th>Type</th><th>Issue Summary</th><th>Points</th></tr></thead>`;
+  const tb = document.createElement('tbody');
+
+  list.forEach(it => {
+    const pts = isBug(it.Type) ? bugW : enhW;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${it.Reporter}</td>
+      <td><span class="pill ${isBug(it.Type)?'bug':'enh'}">${isBug(it.Type)?'Bug':'Enhancement'}</span></td>
+      <td>${it.IssueSummary}</td>
+      <td>${pts}</td>`;
+    tb.appendChild(tr);
+  });
+  table.appendChild(tb);
+  box.appendChild(table);
+}
+
+function renderIssuesList() {
+  const bugW = parseInt(document.getElementById('bugWeight').value||'3',10);
+  const enhW = parseInt(document.getElementById('enhWeight').value||'1',10);
+  const q = document.getElementById('searchBox').value||'';
+
+  const box = document.getElementById('issues');
+  box.innerHTML = "";
+  const table = document.createElement('table');
+  table.innerHTML = `<thead><tr><th>Reporter</th><th>Type</th><th>Issue Summary</th><th>Points</th></tr></thead>`;
+  const tb = document.createElement('tbody');
+
+  issues.forEach(it => {
+    const hay = (it.Reporter + " " + it.Type + " " + it.IssueSummary).toLowerCase();
+    if (q && !hay.includes(q.toLowerCase())) return;
+    const pts = isBug(it.Type) ? bugW : enhW;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${it.Reporter}</td>
+      <td><span class="pill ${isBug(it.Type)?'bug':'enh'}">${isBug(it.Type)?'Bug':'Enhancement'}</span></td>
+      <td>${it.IssueSummary}</td>
+      <td>${pts}</td>`;
+    tb.appendChild(tr);
+  });
+
+  table.appendChild(tb);
+  box.appendChild(table);
+}
+
+function refreshAll() { renderLeaderboard(); renderIssuesList(); }
+
+// De-duplicate by composite key
+function dedupe(records) {
+  const seen = new Set();
+  const out = [];
+  for (const it of records) {
+    const key = [it.Reporter||"", it.Type||"", it.IssueSummary||""].join("||").toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(it);
+  }
+  return out;
+}
+
+// Upload handler (Append vs Replace)
+document.getElementById('fileInput').addEventListener('change', (ev) => {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    const rows = parseCSV(text);
+    const recs = toRecords(rows);
+    if (!recs.length) return;
+
+    const append = document.getElementById('appendMode').checked;
+    if (append) {
+      issues = dedupe([...(issues||[]), ...recs]);
+      alert(`Appended ${recs.length} rows. Total after merge: ${issues.length}. (De-duplicated by Reporter+Type+Issue Summary)`);
+    } else {
+      issues = recs;
+      alert(`Replaced with ${issues.length} rows.`);
+    }
+    refreshAll();
+  };
+  reader.readAsText(file);
+});
+
+// Controls
+document.getElementById('bugWeight').addEventListener('input', refreshAll);
+document.getElementById('enhWeight').addEventListener('input', refreshAll);
+document.getElementById('searchBox').addEventListener('input', refreshAll);
+
+// Exports
+function exportCSV(name, rows, header) {
+  const lines = [header.join(",")];
+  for (const r of rows) {
+    const line = header.map(h => {
+      const v = (r[h] ?? "").toString().replaceAll('"','""');
+      return `"${v}"`;
+    }).join(",");
+    lines.push(line);
+  }
+  const blob = new Blob([lines.join("\n")], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.click();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('exportLb').addEventListener('click', () => {
+  const bugW = parseInt(document.getElementById('bugWeight').value||'3',10);
+  const enhW = parseInt(document.getElementById('enhWeight').value||'1',10);
+  const q = document.getElementById('searchBox').value||'';
+  const rows = computeLeaderboard(bugW, enhW, q).map(r => ({Reporter:r.Reporter, Points:r.Points}));
+  exportCSV("RitaGo_Leaderboard_Weighted.csv", rows, ["Reporter","Points"]);
+});
+
+document.getElementById('exportIssues').addEventListener('click', () => {
+  const bugW = parseInt(document.getElementById('bugWeight').value||'3',10);
+  const enhW = parseInt(document.getElementById('enhWeight').value||'1',10);
+  const q = document.getElementById('searchBox').value||'';
+  const rows = issues.filter(it => {
+    const hay = (it.Reporter + " " + it.Type + " " + it.IssueSummary).toLowerCase();
+    return !q || hay.includes(q.toLowerCase());
+  }).map(it => ({Reporter:it.Reporter, Type:it.Type, IssueSummary:it.IssueSummary, Points: isBug(it.Type)?bugW:enhW}));
+  exportCSV("RitaGo_Issues_Filtered.csv", rows, ["Reporter","Type","IssueSummary","Points"]);
+});
+
+// Initial render (empty until upload)
+refreshAll();
+</script>
+</body>
+</html>
