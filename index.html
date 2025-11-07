@@ -31,15 +31,18 @@
 </style>
 </head>
 <body>
-  <h1>RitaGo Leaderboard — Upload, Append & Recalculate</h1>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <h1 style="margin: 0;">RitaGo Leaderboard — Upload, Append & Recalculate</h1>
+    <button id="adminBtn" class="btn">Admin Login</button>
+  </div>
   <div class="card" style="margin-bottom:16px;">
     <div class="controls">
-      <div>
+      <div id="uploadSection" style="display: none;">
         <label for="fileInput">Detailed issues CSV</label>
         <input id="fileInput" type="file" accept=".csv" />
         <div class="hint">Columns (case-insensitive): Reporter, Type, Issue Summary</div>
       </div>
-      <div>
+      <div id="appendSection" style="display: none;">
         <label>Upload mode</label>
         <div class="toolbar">
           <label style="display:flex;align-items:center;gap:6px;">
@@ -49,11 +52,11 @@
         </div>
         <div class="hint">If checked, new rows are added and de-duplicated by Reporter+Type+Issue Summary.</div>
       </div>
-      <div>
+      <div id="bugWeightSection" style="display: none;">
         <label>Bug weight</label>
         <input id="bugWeight" type="number" value="3" min="0" step="1" />
       </div>
-      <div>
+      <div id="enhWeightSection" style="display: none;">
         <label>Enhancement weight</label>
         <input id="enhWeight" type="number" value="1" min="0" step="1" />
       </div>
@@ -88,6 +91,52 @@
 <script>
 // Starter set (empty by default — load your CSV to populate)
 let issues = [];
+
+// Admin authentication
+const ADMIN_PASSWORD = "admin123"; // Change this to your desired password
+let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+
+function updateAdminUI() {
+  const btn = document.getElementById('adminBtn');
+  const sections = ['uploadSection', 'appendSection', 'bugWeightSection', 'enhWeightSection'];
+
+  if (isAdmin) {
+    btn.textContent = 'Logout';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = '';
+    });
+  } else {
+    btn.textContent = 'Admin Login';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+}
+
+document.getElementById('adminBtn').addEventListener('click', () => {
+  if (isAdmin) {
+    // Logout
+    isAdmin = false;
+    sessionStorage.removeItem('isAdmin');
+    updateAdminUI();
+  } else {
+    // Login
+    const password = prompt('Enter admin password:');
+    if (password === ADMIN_PASSWORD) {
+      isAdmin = true;
+      sessionStorage.setItem('isAdmin', 'true');
+      updateAdminUI();
+      alert('Admin access granted!');
+    } else if (password !== null) {
+      alert('Incorrect password.');
+    }
+  }
+});
+
+// Initialize admin UI on page load
+updateAdminUI();
 
 // CSV parser (handles quotes, commas, CRLF)
 function parseCSV(text) {
