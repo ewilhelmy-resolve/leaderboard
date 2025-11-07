@@ -92,6 +92,30 @@
 // Starter set (empty by default — load your CSV to populate)
 let issues = [];
 
+// LocalStorage persistence
+const STORAGE_KEY = 'ritago_leaderboard_data';
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(issues));
+  } catch (e) {
+    console.error('Failed to save data:', e);
+  }
+}
+
+function loadFromStorage() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      issues = JSON.parse(stored);
+      return true;
+    }
+  } catch (e) {
+    console.error('Failed to load data:', e);
+  }
+  return false;
+}
+
 // Admin authentication
 const ADMIN_PASSWORD = "admin123"; // Change this to your desired password
 let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
@@ -330,6 +354,7 @@ document.getElementById('fileInput').addEventListener('change', (ev) => {
       issues = recs;
       alert(`Replaced with ${issues.length} rows.`);
     }
+    saveToStorage();
     refreshAll();
   };
   reader.readAsText(file);
@@ -376,7 +401,8 @@ document.getElementById('exportIssues').addEventListener('click', () => {
   exportCSV("RitaGo_Issues_Filtered.csv", rows, ["Reporter","Type","IssueSummary","Points"]);
 });
 
-// Initial render (empty until upload)
+// Initial render - load persisted data if available
+loadFromStorage();
 refreshAll();
 </script>
 </body>
