@@ -60,6 +60,11 @@
         <label>Enhancement weight</label>
         <input id="enhWeight" type="number" value="1" min="0" step="1" />
       </div>
+      <div id="saveSection" style="display: none;">
+        <label>Save to GitHub</label>
+        <button id="downloadJson" class="btn">Download data.json</button>
+        <div class="hint">Upload CSV first, then download & commit to GitHub</div>
+      </div>
       <div>
         <label>Filter</label>
         <input id="searchBox" type="text" placeholder="Search reporter or text..." />
@@ -92,28 +97,31 @@
 // Starter set (empty by default — load your CSV to populate)
 let issues = [];
 
-// LocalStorage persistence
-const STORAGE_KEY = 'ritago_leaderboard_data';
-
-function saveToStorage() {
+// JSON file persistence
+async function loadFromJSON() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(issues));
-  } catch (e) {
-    console.error('Failed to save data:', e);
-  }
-}
-
-function loadFromStorage() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      issues = JSON.parse(stored);
+    const response = await fetch('data.json');
+    if (response.ok) {
+      const data = await response.json();
+      issues = data;
       return true;
     }
   } catch (e) {
-    console.error('Failed to load data:', e);
+    console.error('Failed to load data from JSON:', e);
   }
   return false;
+}
+
+function downloadJSON() {
+  const dataStr = JSON.stringify(issues, null, 2);
+  const blob = new Blob([dataStr], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  alert('data.json downloaded! Commit this file to your GitHub repo to update the public leaderboard.');
 }
 
 // Admin authentication
@@ -122,7 +130,7 @@ let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
 function updateAdminUI() {
   const btn = document.getElementById('adminBtn');
-  const sections = ['uploadSection', 'appendSection', 'bugWeightSection', 'enhWeightSection'];
+  const sections = ['uploadSection', 'appendSection', 'bugWeightSection', 'enhWeightSection', 'saveSection'];
 
   if (isAdmin) {
     btn.textContent = 'Logout';
@@ -349,12 +357,11 @@ document.getElementById('fileInput').addEventListener('change', (ev) => {
     const append = document.getElementById('appendMode').checked;
     if (append) {
       issues = dedupe([...(issues||[]), ...recs]);
-      alert(`Appended ${recs.length} rows. Total after merge: ${issues.length}. (De-duplicated by Reporter+Type+Issue Summary)`);
+      alert(`Appended ${recs.length} rows. Total after merge: ${issues.length}. (De-duplicated by Reporter+Type+Issue Summary)\n\nNow click "Download data.json" and commit it to GitHub.`);
     } else {
       issues = recs;
-      alert(`Replaced with ${issues.length} rows.`);
+      alert(`Replaced with ${issues.length} rows.\n\nNow click "Download data.json" and commit it to GitHub.`);
     }
-    saveToStorage();
     refreshAll();
   };
   reader.readAsText(file);
@@ -364,6 +371,7 @@ document.getElementById('fileInput').addEventListener('change', (ev) => {
 document.getElementById('bugWeight').addEventListener('input', refreshAll);
 document.getElementById('enhWeight').addEventListener('input', refreshAll);
 document.getElementById('searchBox').addEventListener('input', refreshAll);
+document.getElementById('downloadJson').addEventListener('click', downloadJSON);
 
 // Exports
 function exportCSV(name, rows, header) {
@@ -401,9 +409,11 @@ document.getElementById('exportIssues').addEventListener('click', () => {
   exportCSV("RitaGo_Issues_Filtered.csv", rows, ["Reporter","Type","IssueSummary","Points"]);
 });
 
-// Initial render - load persisted data if available
-loadFromStorage();
-refreshAll();
+// Initial render - load data from JSON file
+(async () => {
+  await loadFromJSON();
+  refreshAll();
+})();
 </script>
 </body>
 </html>
