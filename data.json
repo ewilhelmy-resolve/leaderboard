@@ -1,1 +1,317 @@
-[]
+[
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Rita freezes after repeated questions"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Rita repeats previous answer"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Rita pulls unnecessary articles for simple questions"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Rita changes sources and response when asked to repeat last answer"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Sorting not working on Knowledge Article module"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Unrelated response after resuming old conversation"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Enhancement",
+    "IssueSummary": "Rita not able to edit responses for better readability"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Enhancement",
+    "IssueSummary": "Improve response formatting with bullets or steps"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Cannot edit or delete Confluence integration after connecting"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Pagination missing on Knowledge Articles page"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Conversation unaware of current date"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Wrong reference shown in answer"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Incorrect or incomplete answer from content"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Rita not understanding corrective feedback"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Rita hallucinating content after feedback"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Bug",
+    "IssueSummary": "Broken link in Welcome window"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Bug",
+    "IssueSummary": "Deleting a chat does not reload the page"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Bug",
+    "IssueSummary": "Source count mismatch when showing multiple files"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Bug",
+    "IssueSummary": "Cannot process XLSX files after upload"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Enhancement",
+    "IssueSummary": "Bulk upload knowledge"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Enhancement",
+    "IssueSummary": "Invite email personalization"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Enhancement",
+    "IssueSummary": "Keycloak reset password message is misleading"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Bug",
+    "IssueSummary": "Bulk edit not working on KB"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Enhancement",
+    "IssueSummary": "Replies correctly in English but should respond in user language"
+  },
+  {
+    "Reporter": "Tamar Auber",
+    "Type": "Bug",
+    "IssueSummary": "Delete confirmation boxes not timing out (toast overlaps)"
+  },
+  {
+    "Reporter": "Tamar Auber",
+    "Type": "Bug",
+    "IssueSummary": "Duplicate document uploads allowed and shown in responses"
+  },
+  {
+    "Reporter": "Tamar Auber",
+    "Type": "Bug",
+    "IssueSummary": "Misleading 'invite sent' message for existing users"
+  },
+  {
+    "Reporter": "Tamar Auber",
+    "Type": "Bug",
+    "IssueSummary": "Rita freezing or returning no response during stress test"
+  },
+  {
+    "Reporter": "Tamar Auber",
+    "Type": "Enhancement",
+    "IssueSummary": "Reprocessing doc are confusing of its intent"
+  },
+  {
+    "Reporter": "Tamar Auber",
+    "Type": "Enhancement",
+    "IssueSummary": "Add contextual self-awareness or KB visibility for users"
+  },
+  {
+    "Reporter": "Jana Sosnowski",
+    "Type": "Bug",
+    "IssueSummary": "Confluence sync titles overflow in Connection Sources"
+  },
+  {
+    "Reporter": "Jana Sosnowski",
+    "Type": "Bug",
+    "IssueSummary": "Knowledge Articles vs Documents count mismatch"
+  },
+  {
+    "Reporter": "Jana Sosnowski",
+    "Type": "Bug",
+    "IssueSummary": "Removed spaces from Confluence not removing synced articles"
+  },
+  {
+    "Reporter": "Jana Sosnowski",
+    "Type": "Bug",
+    "IssueSummary": "Dropdown source count not matching actual sources"
+  },
+  {
+    "Reporter": "Krishant Lodhia",
+    "Type": "Bug",
+    "IssueSummary": "Query count not incrementing in KB Articles"
+  },
+  {
+    "Reporter": "Krishant Lodhia",
+    "Type": "Bug",
+    "IssueSummary": "Incorrect source cited for specific question"
+  },
+  {
+    "Reporter": "Krishant Lodhia",
+    "Type": "Bug",
+    "IssueSummary": "Mobile menu cannot be closed on small viewports"
+  },
+  {
+    "Reporter": "Krishant Lodhia",
+    "Type": "Bug",
+    "IssueSummary": "DOCX file upload fails with 'Failed to fetch' error"
+  },
+  {
+    "Reporter": "Roc�o Cerb�n",
+    "Type": "Bug",
+    "IssueSummary": "Invites not sending successfully"
+  },
+  {
+    "Reporter": "Roc�o Cerb�n",
+    "Type": "Bug",
+    "IssueSummary": "Links from uploaded documents not appearing in responses"
+  },
+  {
+    "Reporter": "Roc�o Cerb�n",
+    "Type": "Bug",
+    "IssueSummary": "Rita giving answers with no KB uploaded"
+  },
+  {
+    "Reporter": "Roc�o Cerb�n",
+    "Type": "Enhancement",
+    "IssueSummary": "Improve readability with numbered steps"
+  },
+  {
+    "Reporter": "Chris Wiggins",
+    "Type": "Bug",
+    "IssueSummary": "Logo missing on login page"
+  },
+  {
+    "Reporter": "Chris Wiggins",
+    "Type": "Bug",
+    "IssueSummary": "Unable to recover from failed Confluence connection"
+  },
+  {
+    "Reporter": "Chris Wiggins",
+    "Type": "Bug",
+    "IssueSummary": "Incorrect organization name in profile"
+  },
+  {
+    "Reporter": "Chris Wiggins",
+    "Type": "Enhancement",
+    "IssueSummary": "End user experience lack context of what they can ask Rita about"
+  },
+  {
+    "Reporter": "Chris Wiggins",
+    "Type": "Bug",
+    "IssueSummary": "Incorrect Contact Us link in invitation email"
+  },
+  {
+    "Reporter": "Erin Anderson",
+    "Type": "Bug",
+    "IssueSummary": "Percentage increase stuck at 4.5% on Knowledge Articles"
+  },
+  {
+    "Reporter": "Erin Anderson",
+    "Type": "Bug",
+    "IssueSummary": "Screen does not refresh after successful Confluence connection"
+  },
+  {
+    "Reporter": "Erin Anderson",
+    "Type": "Enhancement",
+    "IssueSummary": "Support more file types in uploads"
+  },
+  {
+    "Reporter": "Erin Anderson",
+    "Type": "Enhancement",
+    "IssueSummary": "Move Connection Sources to main tab with Knowledge Articles"
+  },
+  {
+    "Reporter": "Nelson Veiga",
+    "Type": "Bug",
+    "IssueSummary": "Mixed responses from multiple sources when resetting password"
+  },
+  {
+    "Reporter": "Nelson Veiga",
+    "Type": "Bug",
+    "IssueSummary": "Incorrect answer when asking about medical plan options"
+  },
+  {
+    "Reporter": "Karthik Shetty",
+    "Type": "Bug",
+    "IssueSummary": "Links from documents not retained after ingestion"
+  },
+  {
+    "Reporter": "Vladislav Angelov",
+    "Type": "Bug",
+    "IssueSummary": "Mismatched free trial days shown in UI"
+  },
+  {
+    "Reporter": "Edgar Elias",
+    "Type": "Bug",
+    "IssueSummary": "LLM disclosed its version in response"
+  },
+  {
+    "Reporter": "Graham McDonough",
+    "Type": "Bug",
+    "IssueSummary": "File processing stuck after upload"
+  },
+  {
+    "Reporter": "Fran Fernandez",
+    "Type": "Bug",
+    "IssueSummary": "Hallucinated answer unrelated to cited sources"
+  },
+  {
+    "Reporter": "Roberto Esquivel",
+    "Type": "Bug",
+    "IssueSummary": "Rita provides answers even with no KBs uploaded"
+  },
+  {
+    "Reporter": "Derek Pascarella",
+    "Type": "Enhancement",
+    "IssueSummary": "Break long text into paragraphs for readability"
+  },
+  {
+    "Reporter": "Matt Murphy",
+    "Type": "Bug",
+    "IssueSummary": "help URL in welcome modal broken"
+  },
+  {
+    "Reporter": "Matt Murphy",
+    "Type": "Bug",
+    "IssueSummary": "I usedÊForgot Password?Êand was able to set my password to justÊ#. I tried again and was able to set it toÊa. Seems like there are no password requirements forÊForgot Password?"
+  },
+  {
+    "Reporter": "Matt Murphy",
+    "Type": "Bug",
+    "IssueSummary": "When signing up,Ê#Êis not recognized as a special character for passwords. When I signed up a few days ago and set my initial password, Dashlane generated one whereÊ#Êwas the only special character and it was invalid until I addedÊ!. There might be other special characters to check."
+  }
+]
