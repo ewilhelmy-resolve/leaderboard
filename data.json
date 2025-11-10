@@ -167,8 +167,18 @@
     },
     {
       "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "RitaGo did not maintain conversation context over time"
+    },
+    {
+      "Reporter": "Tamar Auber",
       "Type": "Enhancement",
       "IssueSummary": "Add contextual self-awareness or KB visibility for users"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "Link generated in response is going to example.domain"
     },
     {
       "Reporter": "Jana Sosnowski",
@@ -184,6 +194,11 @@
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Removed spaces from Confluence not removing synced articles"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Enchancement",
+      "IssueSummary": "No visibile indicator that the file was uploaded"
     },
     {
       "Reporter": "Jana Sosnowski",
@@ -367,17 +382,17 @@
         },
         {
           "Reporter": "Tamar Auber",
-          "Points": 14,
+          "Points": 17,
           "Rank": 4
+        },
+        {
+          "Reporter": "Jana Sosnowski",
+          "Points": 16,
+          "Rank": 5
         },
         {
           "Reporter": "Chris Wiggins",
           "Points": 13,
-          "Rank": 5
-        },
-        {
-          "Reporter": "Jana Sosnowski",
-          "Points": 12,
           "Rank": 6
         },
         {
@@ -448,5 +463,5 @@
       ]
     }
   ],
-  "lastUpdated": "2025-11-10T16:54:16.429Z"
+  "lastUpdated": "2025-11-10T21:04:35.304Z"
 }
