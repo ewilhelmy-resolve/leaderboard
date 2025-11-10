@@ -28,6 +28,34 @@
   .pill.enh { background:#f0f9ff; }
   .hint { font-size:12px; color:var(--muted); }
   .toolbar { display:flex; gap:8px; flex-wrap: wrap; align-items:center; }
+
+  /* Rank change indicators */
+  .rank-indicator {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .rank-up { color: #16a34a; }
+  .rank-down { color: #dc2626; }
+  .rank-same { color: #9ca3af; }
+
+  /* Leaderboard row animations */
+  tbody tr {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  tbody tr:hover {
+    background: #f9fafb;
+    transform: scale(1.01);
+  }
 </style>
 </head>
 <body>
@@ -69,7 +97,7 @@
         <label>Filter</label>
         <input id="searchBox" type="text" placeholder="Search reporter or text..." />
       </div>
-      <div>
+      <div id="exportSection" style="display: none;">
         <label>Exports</label>
         <div class="toolbar">
           <button id="exportLb" class="btn">Export leaderboard CSV</button>
@@ -77,14 +105,17 @@
         </div>
       </div>
     </div>
-    <div class="hint" style="margin-top:8px;">
+    <div class="hint" style="margin-top:8px; display: none;" id="adminHint">
       Tip: Use <b>Append</b> to add new feedback without losing the current set. Click a reporter to see their issues.
     </div>
   </div>
 
   <div class="row">
     <div class="card">
-      <h2>Leaderboard</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h2 style="margin: 0;">Leaderboard</h2>
+        <div id="lastUpdatedDisplay" class="hint" style="margin: 0;"></div>
+      </div>
       <div id="leaderboard"></div>
     </div>
     <div class="card">
@@ -96,14 +127,25 @@
 <script>
 // Starter set (empty by default — load your CSV to populate)
 let issues = [];
+let snapshots = [];
+let lastUpdated = null;
 
-// JSON file persistence
+// JSON file persistence with snapshot support
 async function loadFromJSON() {
   try {
     const response = await fetch('data.json');
     if (response.ok) {
       const data = await response.json();
-      issues = data;
+      // Support both old format (array) and new format (object)
+      if (Array.isArray(data)) {
+        issues = data;
+        snapshots = [];
+        lastUpdated = null;
+      } else {
+        issues = data.issues || [];
+        snapshots = data.snapshots || [];
+        lastUpdated = data.lastUpdated || null;
+      }
       return true;
     }
   } catch (e) {
@@ -112,8 +154,33 @@ async function loadFromJSON() {
   return false;
 }
 
+function getTodayString() {
+  const now = new Date();
+  return now.toISOString().split('T')[0]; // YYYY-MM-DD
+}
+
+function saveSnapshot(leaderboard) {
+  const today = getTodayString();
+  // Remove today's snapshot if it exists
+  snapshots = snapshots.filter(s => s.date !== today);
+  // Add new snapshot
+  snapshots.push({
+    date: today,
+    leaderboard: leaderboard.map(r => ({Reporter: r.Reporter, Points: r.Points, Rank: r.Rank}))
+  });
+  // Keep only last 30 days
+  if (snapshots.length > 30) {
+    snapshots = snapshots.slice(-30);
+  }
+}
+
 function downloadJSON() {
-  const dataStr = JSON.stringify(issues, null, 2);
+  const dataObj = {
+    issues: issues,
+    snapshots: snapshots,
+    lastUpdated: new Date().toISOString()
+  };
+  const dataStr = JSON.stringify(dataObj, null, 2);
   const blob = new Blob([dataStr], {type: 'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -124,13 +191,58 @@ function downloadJSON() {
   alert('data.json downloaded! Commit this file to your GitHub repo to update the public leaderboard.');
 }
 
+function getYesterdaySnapshot() {
+  if (snapshots.length === 0) return null;
+  const today = getTodayString();
+  // Find most recent snapshot from a previous day
+  const pastSnapshots = snapshots.filter(s => s.date < today);
+  if (pastSnapshots.length === 0) return null;
+  return pastSnapshots[pastSnapshots.length - 1];
+}
+
+function getRankChange(reporter, currentRank, yesterdaySnapshot) {
+  if (!yesterdaySnapshot) return {status: 'new', change: 0};
+  const oldEntry = yesterdaySnapshot.leaderboard.find(r => r.Reporter === reporter);
+  if (!oldEntry) return {status: 'new', change: 0};
+  const change = oldEntry.Rank - currentRank; // Positive = moved up
+  if (change > 0) return {status: 'up', change};
+  if (change < 0) return {status: 'down', change: Math.abs(change)};
+  return {status: 'same', change: 0};
+}
+
+function formatTimestamp(isoString) {
+  if (!isoString) return '';
+  const date = new Date(isoString);
+  const now = new Date();
+  const diffMs = now - date;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+
+  if (diffMins < 1) return 'Updated just now';
+  if (diffMins < 60) return `Updated ${diffMins}m ago`;
+  if (diffHours < 24) return `Updated ${diffHours}h ago`;
+  if (diffDays === 1) return 'Updated yesterday';
+  if (diffDays < 7) return `Updated ${diffDays}d ago`;
+
+  return `Updated ${date.toLocaleDateString()}`;
+}
+
+function updateTimestampDisplay() {
+  const display = document.getElementById('lastUpdatedDisplay');
+  if (display && lastUpdated) {
+    display.textContent = formatTimestamp(lastUpdated);
+  }
+}
+
 // Admin authentication
 const ADMIN_PASSWORD = "admin123"; // Change this to your desired password
 let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
 function updateAdminUI() {
   const btn = document.getElementById('adminBtn');
-  const sections = ['uploadSection', 'appendSection', 'bugWeightSection', 'enhWeightSection', 'saveSection'];
+  const sections = ['uploadSection', 'appendSection', 'bugWeightSection', 'enhWeightSection', 'saveSection', 'exportSection'];
+  const hints = ['adminHint'];
 
   if (isAdmin) {
     btn.textContent = 'Logout';
@@ -138,9 +250,17 @@ function updateAdminUI() {
       const el = document.getElementById(id);
       if (el) el.style.display = '';
     });
+    hints.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'block';
+    });
   } else {
     btn.textContent = 'Admin Login';
     sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    hints.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     });
@@ -238,6 +358,12 @@ function renderLeaderboard() {
   const q = document.getElementById('searchBox').value||'';
   const rows = computeLeaderboard(bugW, enhW, q);
 
+  // Add rank to each row
+  rows.forEach((r, i) => r.Rank = i + 1);
+
+  // Get yesterday's snapshot for comparison
+  const yesterdaySnapshot = getYesterdaySnapshot();
+
   // counts
   const counts = new Map();
   for (const it of issues) {
@@ -258,10 +384,21 @@ function renderLeaderboard() {
 
   rows.forEach((r,i) => {
     const c = counts.get(r.Reporter) || {bugs:0, enh:0};
+    const rankChange = getRankChange(r.Reporter, r.Rank, yesterdaySnapshot);
+
+    let indicator = '';
+    if (rankChange.status === 'up') {
+      indicator = `<span class="rank-indicator rank-up" title="Up ${rankChange.change} ${rankChange.change === 1 ? 'spot' : 'spots'}">↑${rankChange.change}</span>`;
+    } else if (rankChange.status === 'down') {
+      indicator = `<span class="rank-indicator rank-down" title="Down ${rankChange.change} ${rankChange.change === 1 ? 'spot' : 'spots'}">↓${rankChange.change}</span>`;
+    } else if (rankChange.status === 'same') {
+      indicator = `<span class="rank-indicator rank-same" title="No change">→</span>`;
+    }
+
     const tr = document.createElement('tr');
     tr.style.cursor = "pointer";
     tr.innerHTML = `<td>${i+1}</td>
-      <td><strong>${r.Reporter}</strong></td>
+      <td><strong>${r.Reporter}</strong>${indicator}</td>
       <td><strong>${r.Points}</strong></td>
       <td><span class="pill bug">${c.bugs} bugs</span> &nbsp; <span class="pill enh">${c.enh} enh</span></td>`;
     tr.addEventListener('click', () => showIssuesFor(r.Reporter));
@@ -270,6 +407,14 @@ function renderLeaderboard() {
 
   table.appendChild(tb);
   box.appendChild(table);
+
+  // Update timestamp display
+  updateTimestampDisplay();
+
+  // Auto-save snapshot when rendering (for admin uploads)
+  if (isAdmin && rows.length > 0) {
+    saveSnapshot(rows);
+  }
 }
 
 function showIssuesFor(name) {
