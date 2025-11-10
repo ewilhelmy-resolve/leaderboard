@@ -36,8 +36,23 @@
   },
   {
     "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Inconsistent responses, e.g. Asked Rita about how we tier customers based on ARR (I do have a pdf about it)"
+  },
+  {
+    "Reporter": "Roberto P.",
+    "Type": "Bug",
+    "IssueSummary": "Responses to a specific question added random information"
+  },
+  {
+    "Reporter": "Roberto P.",
     "Type": "Enhancement",
     "IssueSummary": "Improve response formatting with bullets or steps"
+  },
+  {
+    "Reporter": "Z",
+    "Type": "Bug",
+    "IssueSummary": "Hallucination based on bad prompts"
   },
   {
     "Reporter": "Z",
@@ -92,7 +107,7 @@
   {
     "Reporter": "Yana Hadzhiyska",
     "Type": "Bug",
-    "IssueSummary": "Cannot process XLSX files after upload"
+    "IssueSummary": "When uploading, \"All files\" option allows none approved file types to upload"
   },
   {
     "Reporter": "Yana Hadzhiyska",
@@ -113,6 +128,11 @@
     "Reporter": "Yana Hadzhiyska",
     "Type": "Bug",
     "IssueSummary": "Bulk edit not working on KB"
+  },
+  {
+    "Reporter": "Yana Hadzhiyska",
+    "Type": "Enhancement",
+    "IssueSummary": "Add specfic file upload error messaging"
   },
   {
     "Reporter": "Yana Hadzhiyska",
@@ -190,22 +210,22 @@
     "IssueSummary": "DOCX file upload fails with 'Failed to fetch' error"
   },
   {
-    "Reporter": "Roc�o Cerb�n",
+    "Reporter": "Rocio Cerbon",
     "Type": "Bug",
     "IssueSummary": "Invites not sending successfully"
   },
   {
-    "Reporter": "Roc�o Cerb�n",
+    "Reporter": "Rocio Cerbon",
     "Type": "Bug",
     "IssueSummary": "Links from uploaded documents not appearing in responses"
   },
   {
-    "Reporter": "Roc�o Cerb�n",
+    "Reporter": "Rocio Cerbon",
     "Type": "Bug",
     "IssueSummary": "Rita giving answers with no KB uploaded"
   },
   {
-    "Reporter": "Roc�o Cerb�n",
+    "Reporter": "Rocio Cerbon",
     "Type": "Enhancement",
     "IssueSummary": "Improve readability with numbered steps"
   },
@@ -307,11 +327,11 @@
   {
     "Reporter": "Matt Murphy",
     "Type": "Bug",
-    "IssueSummary": "I usedÊForgot Password?Êand was able to set my password to justÊ#. I tried again and was able to set it toÊa. Seems like there are no password requirements forÊForgot Password?"
+    "IssueSummary": "No password requirements set for Forgot Password?"
   },
   {
     "Reporter": "Matt Murphy",
     "Type": "Bug",
-    "IssueSummary": "When signing up,Ê#Êis not recognized as a special character for passwords. When I signed up a few days ago and set my initial password, Dashlane generated one whereÊ#Êwas the only special character and it was invalid until I addedÊ!. There might be other special characters to check."
+    "IssueSummary": "When signing up, does not recognized as a special character for passwords."
   }
 ]
