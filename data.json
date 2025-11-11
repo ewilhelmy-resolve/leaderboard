@@ -186,6 +186,11 @@
       "IssueSummary": "short term memory in a chat loosing context"
     },
     {
+      "Reporter": "Tamar Auber",
+      "Type": "Enchancement",
+      "IssueSummary": "More persona types outside of IT"
+    },
+    {
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Link generated in response is going to example.domain"
@@ -502,7 +507,7 @@
         },
         {
           "Reporter": "Tamar Auber",
-          "Points": 21,
+          "Points": 22,
           "Rank": 4
         },
         {
@@ -583,5 +588,5 @@
       ]
     }
   ],
-  "lastUpdated": "2025-11-11T01:47:11.379Z"
+  "lastUpdated": "2025-11-11T01:50:55.355Z"
 }
