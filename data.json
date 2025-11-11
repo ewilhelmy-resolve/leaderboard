@@ -176,6 +176,16 @@
       "IssueSummary": "Add contextual self-awareness or KB visibility for users"
     },
     {
+      "Reporter": "Tamar Auber",
+      "Type": "Enchancement",
+      "IssueSummary": "long term memory for chats"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "short term memory in a chat loosing context"
+    },
+    {
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Link generated in response is going to example.domain"
@@ -204,6 +214,16 @@
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Dropdown source count not matching actual sources"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "User accounts showing messaging to upload knowledge"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "If add a user before knowledge is added , user does is not able to chat after the admin adds knowledge (does not refresh and if other users are added after that they cannot chat)"
     },
     {
       "Reporter": "Krishant Lodhia",
@@ -461,7 +481,107 @@
           "Rank": 19
         }
       ]
+    },
+    {
+      "date": "2025-11-11",
+      "leaderboard": [
+        {
+          "Reporter": "Roberto P.",
+          "Points": 26,
+          "Rank": 1
+        },
+        {
+          "Reporter": "Z",
+          "Points": 24,
+          "Rank": 2
+        },
+        {
+          "Reporter": "Jana Sosnowski",
+          "Points": 22,
+          "Rank": 3
+        },
+        {
+          "Reporter": "Tamar Auber",
+          "Points": 21,
+          "Rank": 4
+        },
+        {
+          "Reporter": "Yana Hadzhiyska",
+          "Points": 20,
+          "Rank": 5
+        },
+        {
+          "Reporter": "Chris Wiggins",
+          "Points": 13,
+          "Rank": 6
+        },
+        {
+          "Reporter": "Krishant Lodhia",
+          "Points": 12,
+          "Rank": 7
+        },
+        {
+          "Reporter": "Rocio Cerbon",
+          "Points": 10,
+          "Rank": 8
+        },
+        {
+          "Reporter": "Matt Murphy",
+          "Points": 9,
+          "Rank": 9
+        },
+        {
+          "Reporter": "Erin Anderson",
+          "Points": 8,
+          "Rank": 10
+        },
+        {
+          "Reporter": "Gary Parker",
+          "Points": 6,
+          "Rank": 11
+        },
+        {
+          "Reporter": "Nelson Veiga",
+          "Points": 6,
+          "Rank": 12
+        },
+        {
+          "Reporter": "Edgar Elias",
+          "Points": 3,
+          "Rank": 13
+        },
+        {
+          "Reporter": "Fran Fernandez",
+          "Points": 3,
+          "Rank": 14
+        },
+        {
+          "Reporter": "Graham McDonough",
+          "Points": 3,
+          "Rank": 15
+        },
+        {
+          "Reporter": "Karthik Shetty",
+          "Points": 3,
+          "Rank": 16
+        },
+        {
+          "Reporter": "Roberto Esquivel",
+          "Points": 3,
+          "Rank": 17
+        },
+        {
+          "Reporter": "Vladislav Angelov",
+          "Points": 3,
+          "Rank": 18
+        },
+        {
+          "Reporter": "Derek Pascarella",
+          "Points": 1,
+          "Rank": 19
+        }
+      ]
     }
   ],
-  "lastUpdated": "2025-11-10T21:04:35.304Z"
+  "lastUpdated": "2025-11-11T01:47:11.379Z"
 }
