@@ -51,6 +51,21 @@
       "IssueSummary": "Improve response formatting with bullets or steps"
     },
     {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita giving 2 different responses to the same  initial question"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita Gave me a Response to a simple greeting (no context of the question)"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Enhancement",
+      "IssueSummary": "UX improvement for better messaging if knowledge is already uploaded"
+    },
+    {
       "Reporter": "Z",
       "Type": "Bug",
       "IssueSummary": "Hallucination based on bad prompts"
@@ -191,6 +206,31 @@
       "IssueSummary": "More persona types outside of IT"
     },
     {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "Admin: RitaGo providing non-existent knowledge base references )"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "User: RitaGo cross-contaminating responses/leakage (?) between accounts and sessions; Non-grounded response"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "RitaGo exposing API content from Espressive source"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "Rita Go reports PDF as processed but no content actually uploaded"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "Query returned answer to previous question/No answer previously"
+    },
+    {
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Link generated in response is going to example.domain"
@@ -229,6 +269,16 @@
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "If add a user before knowledge is added , user does is not able to chat after the admin adds knowledge (does not refresh and if other users are added after that they cannot chat)"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "When 2nd Admin deletes Confluence and adds new one, old sync still appears"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "It appears Rita Go instances are sharing knowledge articles"
     },
     {
       "Reporter": "Krishant Lodhia",
@@ -359,6 +409,11 @@
       "Reporter": "Derek Pascarella",
       "Type": "Enhancement",
       "IssueSummary": "Break long text into paragraphs for readability"
+    },
+    {
+      "Reporter": "Derek Pascarella",
+      "Type": "Bug",
+      "IssueSummary": "Slow Response chats over 20 seconds for respoonse"
     },
     {
       "Reporter": "Matt Murphy",
@@ -586,7 +641,107 @@
           "Rank": 19
         }
       ]
+    },
+    {
+      "date": "2025-11-12",
+      "leaderboard": [
+        {
+          "Reporter": "Tamar Auber",
+          "Points": 37,
+          "Rank": 1
+        },
+        {
+          "Reporter": "Roberto P.",
+          "Points": 33,
+          "Rank": 2
+        },
+        {
+          "Reporter": "Jana Sosnowski",
+          "Points": 28,
+          "Rank": 3
+        },
+        {
+          "Reporter": "Z",
+          "Points": 24,
+          "Rank": 4
+        },
+        {
+          "Reporter": "Yana Hadzhiyska",
+          "Points": 20,
+          "Rank": 5
+        },
+        {
+          "Reporter": "Chris Wiggins",
+          "Points": 13,
+          "Rank": 6
+        },
+        {
+          "Reporter": "Krishant Lodhia",
+          "Points": 12,
+          "Rank": 7
+        },
+        {
+          "Reporter": "Rocio Cerbon",
+          "Points": 10,
+          "Rank": 8
+        },
+        {
+          "Reporter": "Matt Murphy",
+          "Points": 9,
+          "Rank": 9
+        },
+        {
+          "Reporter": "Erin Anderson",
+          "Points": 8,
+          "Rank": 10
+        },
+        {
+          "Reporter": "Gary Parker",
+          "Points": 6,
+          "Rank": 11
+        },
+        {
+          "Reporter": "Nelson Veiga",
+          "Points": 6,
+          "Rank": 12
+        },
+        {
+          "Reporter": "Derek Pascarella",
+          "Points": 4,
+          "Rank": 13
+        },
+        {
+          "Reporter": "Edgar Elias",
+          "Points": 3,
+          "Rank": 14
+        },
+        {
+          "Reporter": "Fran Fernandez",
+          "Points": 3,
+          "Rank": 15
+        },
+        {
+          "Reporter": "Graham McDonough",
+          "Points": 3,
+          "Rank": 16
+        },
+        {
+          "Reporter": "Karthik Shetty",
+          "Points": 3,
+          "Rank": 17
+        },
+        {
+          "Reporter": "Roberto Esquivel",
+          "Points": 3,
+          "Rank": 18
+        },
+        {
+          "Reporter": "Vladislav Angelov",
+          "Points": 3,
+          "Rank": 19
+        }
+      ]
     }
   ],
-  "lastUpdated": "2025-11-11T01:50:55.355Z"
+  "lastUpdated": "2025-11-12T23:26:47.334Z"
 }
