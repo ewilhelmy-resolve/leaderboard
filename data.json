@@ -66,6 +66,26 @@
       "IssueSummary": "UX improvement for better messaging if knowledge is already uploaded"
     },
     {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita might be hallucinating a response"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita ignoring the most obvious source."
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita Mixed context of previous question, but in addition it took an irrrelevant article to suggest a response"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita quotes one article for reference , but then adds the link to a completely different one"
+    },
+    {
       "Reporter": "Z",
       "Type": "Bug",
       "IssueSummary": "Hallucination based on bad prompts"
@@ -104,6 +124,31 @@
       "Reporter": "Z",
       "Type": "Bug",
       "IssueSummary": "Rita hallucinating content after feedback"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "Chat prompt in UI wraps too soon"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Bug",
+      "IssueSummary": "Answer to response quality is generic/irrelevant response"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Bug",
+      "IssueSummary": "Answer qaulity , repetitive / not responsive to suggested question"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Bug",
+      "IssueSummary": "Hallucinated / hardcoded contact info in Arabic response"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "RTL formatting issues in Arabic response"
     },
     {
       "Reporter": "Yana Hadzhiyska",
@@ -231,6 +276,16 @@
       "IssueSummary": "Query returned answer to previous question/No answer previously"
     },
     {
+      "Reporter": "Tamar Auber",
+      "Type": "Enchancement",
+      "IssueSummary": "Remove the ability to allow founding owner to be removed"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "RitaGo duplicated response for next question."
+    },
+    {
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Link generated in response is going to example.domain"
@@ -281,6 +336,16 @@
       "IssueSummary": "It appears Rita Go instances are sharing knowledge articles"
     },
     {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Enchancement",
+      "IssueSummary": "Share knowledge across workspace (future)"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "Sharing knowledge with cross over of tenants with one admin over another"
+    },
+    {
       "Reporter": "Krishant Lodhia",
       "Type": "Bug",
       "IssueSummary": "Query count not incrementing in KB Articles"
@@ -319,6 +384,11 @@
       "Reporter": "Rocio Cerbon",
       "Type": "Enhancement",
       "IssueSummary": "Improve readability with numbered steps"
+    },
+    {
+      "Reporter": "Rocio Cerbon",
+      "Type": "Enchancement",
+      "IssueSummary": "Rita is blocking non-IT questions"
     },
     {
       "Reporter": "Chris Wiggins",
@@ -439,6 +509,26 @@
       "Reporter": "Gary Parker",
       "Type": "Bug",
       "IssueSummary": "Welcome modal link is going to a blank page"
+    },
+    {
+      "Reporter": "Ivan Velev",
+      "Type": "Bug",
+      "IssueSummary": "Upload"
+    },
+    {
+      "Reporter": "Pawel Kozmic",
+      "Type": "Bug",
+      "IssueSummary": "Responses to a specific question added random information"
+    },
+    {
+      "Reporter": "Kevin Shaw",
+      "Type": "Bug",
+      "IssueSummary": "Responses to a specific question added random information"
+    },
+    {
+      "Reporter": "Kevin Shaw",
+      "Type": "Bug",
+      "IssueSummary": "Document is not formatting correctly and reprocessing did not work"
     }
   ],
   "snapshots": [
@@ -741,7 +831,122 @@
           "Rank": 19
         }
       ]
+    },
+    {
+      "date": "2025-11-13",
+      "leaderboard": [
+        {
+          "Reporter": "Roberto P.",
+          "Points": 45,
+          "Rank": 1
+        },
+        {
+          "Reporter": "Tamar Auber",
+          "Points": 41,
+          "Rank": 2
+        },
+        {
+          "Reporter": "Z",
+          "Points": 35,
+          "Rank": 3
+        },
+        {
+          "Reporter": "Jana Sosnowski",
+          "Points": 32,
+          "Rank": 4
+        },
+        {
+          "Reporter": "Yana Hadzhiyska",
+          "Points": 20,
+          "Rank": 5
+        },
+        {
+          "Reporter": "Chris Wiggins",
+          "Points": 13,
+          "Rank": 6
+        },
+        {
+          "Reporter": "Krishant Lodhia",
+          "Points": 12,
+          "Rank": 7
+        },
+        {
+          "Reporter": "Rocio Cerbon",
+          "Points": 11,
+          "Rank": 8
+        },
+        {
+          "Reporter": "Matt Murphy",
+          "Points": 9,
+          "Rank": 9
+        },
+        {
+          "Reporter": "Erin Anderson",
+          "Points": 8,
+          "Rank": 10
+        },
+        {
+          "Reporter": "Gary Parker",
+          "Points": 6,
+          "Rank": 11
+        },
+        {
+          "Reporter": "Kevin Shaw",
+          "Points": 6,
+          "Rank": 12
+        },
+        {
+          "Reporter": "Nelson Veiga",
+          "Points": 6,
+          "Rank": 13
+        },
+        {
+          "Reporter": "Derek Pascarella",
+          "Points": 4,
+          "Rank": 14
+        },
+        {
+          "Reporter": "Edgar Elias",
+          "Points": 3,
+          "Rank": 15
+        },
+        {
+          "Reporter": "Fran Fernandez",
+          "Points": 3,
+          "Rank": 16
+        },
+        {
+          "Reporter": "Graham McDonough",
+          "Points": 3,
+          "Rank": 17
+        },
+        {
+          "Reporter": "Ivan Velev",
+          "Points": 3,
+          "Rank": 18
+        },
+        {
+          "Reporter": "Karthik Shetty",
+          "Points": 3,
+          "Rank": 19
+        },
+        {
+          "Reporter": "Pawel Kozmic",
+          "Points": 3,
+          "Rank": 20
+        },
+        {
+          "Reporter": "Roberto Esquivel",
+          "Points": 3,
+          "Rank": 21
+        },
+        {
+          "Reporter": "Vladislav Angelov",
+          "Points": 3,
+          "Rank": 22
+        }
+      ]
     }
   ],
-  "lastUpdated": "2025-11-12T23:26:47.334Z"
+  "lastUpdated": "2025-11-13T22:08:14.375Z"
 }
