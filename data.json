@@ -346,6 +346,11 @@
       "IssueSummary": "Sharing knowledge with cross over of tenants with one admin over another"
     },
     {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Enchancement",
+      "IssueSummary": "Generic prompt when not aware of the knowledge to answer is confusing"
+    },
+    {
       "Reporter": "Krishant Lodhia",
       "Type": "Bug",
       "IssueSummary": "Query count not incrementing in KB Articles"
@@ -852,7 +857,7 @@
         },
         {
           "Reporter": "Jana Sosnowski",
-          "Points": 32,
+          "Points": 33,
           "Rank": 4
         },
         {
@@ -948,5 +953,5 @@
       ]
     }
   ],
-  "lastUpdated": "2025-11-13T22:08:14.375Z"
+  "lastUpdated": "2025-11-13T22:11:48.306Z"
 }
