@@ -27,7 +27,7 @@
     },
     {
       "Reporter": "Roberto P.",
-      "Type": "Bug",
+      "Type": "Enhancement",
       "IssueSummary": "Unrelated response after resuming old conversation"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "Reporter": "Roberto P.",
-      "Type": "Bug",
+      "Type": "Enhancement",
       "IssueSummary": "Inconsistent responses, e.g. Asked Rita about how we tier customers based on ARR (I do have a pdf about it)"
     },
     {
@@ -86,6 +86,31 @@
       "IssueSummary": "Rita quotes one article for reference , but then adds the link to a completely different one"
     },
     {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita did not provide link to source on the response nor on the normal displayable option after a response"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Bug",
+      "IssueSummary": "Rita responded me in a different language, I never asked for a change of language and even the KB where it pulled the info was on english language as well."
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Enchancement",
+      "IssueSummary": "Answer qaulity - The phrasing of the same question impacts the outcome"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Enchancement",
+      "IssueSummary": "Answer qaulity - Improvement repeated responses"
+    },
+    {
+      "Reporter": "Roberto P.",
+      "Type": "Enchancement",
+      "IssueSummary": "Answer qaulity - Completely different responses to the same question, dependent if the question is asked first, or after a session or 4-5 different ones"
+    },
+    {
       "Reporter": "Z",
       "Type": "Bug",
       "IssueSummary": "Hallucination based on bad prompts"
@@ -132,13 +157,18 @@
     },
     {
       "Reporter": "Z",
-      "Type": "Bug",
+      "Type": "Enchancement",
       "IssueSummary": "Answer to response quality is generic/irrelevant response"
     },
     {
       "Reporter": "Z",
-      "Type": "Bug",
+      "Type": "Enchancement",
       "IssueSummary": "Answer qaulity , repetitive / not responsive to suggested question"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "Answer quality – does not respond to the IT portion of the question"
     },
     {
       "Reporter": "Z",
@@ -149,6 +179,31 @@
       "Reporter": "Z",
       "Type": "Enchancement",
       "IssueSummary": "RTL formatting issues in Arabic response"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "UX messaging for when images in chat are not supported"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "Inconsistency when handling mixed IT + non-IT requests"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Bug",
+      "IssueSummary": "Answer quality – references “provided information” without a citation"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "Answer quality – introduces an unsupported MFA tool (Authy)"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "Inconsistent handling of the same expense-reimbursement question"
     },
     {
       "Reporter": "Yana Hadzhiyska",
@@ -286,6 +341,31 @@
       "IssueSummary": "RitaGo duplicated response for next question."
     },
     {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "Accurate information, no citation"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Enchancement",
+      "IssueSummary": "Knowledge docs should be consistently accessible across all chat sessions"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Enchancement",
+      "IssueSummary": "Previously successful query now falls back to generic response"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Bug",
+      "IssueSummary": "Multi-document comparison query triggers generic response"
+    },
+    {
+      "Reporter": "Tamar Auber",
+      "Type": "Enchancement",
+      "IssueSummary": "Rita Go did not recognize KB article despite Menu Optimizer being in title; KB articles not consistently accessed"
+    },
+    {
       "Reporter": "Jana Sosnowski",
       "Type": "Bug",
       "IssueSummary": "Link generated in response is going to example.domain"
@@ -349,6 +429,11 @@
       "Reporter": "Jana Sosnowski",
       "Type": "Enchancement",
       "IssueSummary": "Generic prompt when not aware of the knowledge to answer is confusing"
+    },
+    {
+      "Reporter": "Jana Sosnowski",
+      "Type": "Bug",
+      "IssueSummary": "Link to confluence resources requires login"
     },
     {
       "Reporter": "Krishant Lodhia",
@@ -951,7 +1036,122 @@
           "Rank": 22
         }
       ]
+    },
+    {
+      "date": "2025-11-14",
+      "leaderboard": [
+        {
+          "Reporter": "Roberto P.",
+          "Points": 50,
+          "Rank": 1
+        },
+        {
+          "Reporter": "Tamar Auber",
+          "Points": 50,
+          "Rank": 2
+        },
+        {
+          "Reporter": "Z",
+          "Points": 39,
+          "Rank": 3
+        },
+        {
+          "Reporter": "Jana Sosnowski",
+          "Points": 36,
+          "Rank": 4
+        },
+        {
+          "Reporter": "Yana Hadzhiyska",
+          "Points": 20,
+          "Rank": 5
+        },
+        {
+          "Reporter": "Chris Wiggins",
+          "Points": 13,
+          "Rank": 6
+        },
+        {
+          "Reporter": "Krishant Lodhia",
+          "Points": 12,
+          "Rank": 7
+        },
+        {
+          "Reporter": "Rocio Cerbon",
+          "Points": 11,
+          "Rank": 8
+        },
+        {
+          "Reporter": "Matt Murphy",
+          "Points": 9,
+          "Rank": 9
+        },
+        {
+          "Reporter": "Erin Anderson",
+          "Points": 8,
+          "Rank": 10
+        },
+        {
+          "Reporter": "Gary Parker",
+          "Points": 6,
+          "Rank": 11
+        },
+        {
+          "Reporter": "Kevin Shaw",
+          "Points": 6,
+          "Rank": 12
+        },
+        {
+          "Reporter": "Nelson Veiga",
+          "Points": 6,
+          "Rank": 13
+        },
+        {
+          "Reporter": "Derek Pascarella",
+          "Points": 4,
+          "Rank": 14
+        },
+        {
+          "Reporter": "Edgar Elias",
+          "Points": 3,
+          "Rank": 15
+        },
+        {
+          "Reporter": "Fran Fernandez",
+          "Points": 3,
+          "Rank": 16
+        },
+        {
+          "Reporter": "Graham McDonough",
+          "Points": 3,
+          "Rank": 17
+        },
+        {
+          "Reporter": "Ivan Velev",
+          "Points": 3,
+          "Rank": 18
+        },
+        {
+          "Reporter": "Karthik Shetty",
+          "Points": 3,
+          "Rank": 19
+        },
+        {
+          "Reporter": "Pawel Kozmic",
+          "Points": 3,
+          "Rank": 20
+        },
+        {
+          "Reporter": "Roberto Esquivel",
+          "Points": 3,
+          "Rank": 21
+        },
+        {
+          "Reporter": "Vladislav Angelov",
+          "Points": 3,
+          "Rank": 22
+        }
+      ]
     }
   ],
-  "lastUpdated": "2025-11-13T22:11:48.306Z"
+  "lastUpdated": "2025-11-14T23:51:44.337Z"
 }
