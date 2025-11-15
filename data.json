@@ -157,7 +157,7 @@
     },
     {
       "Reporter": "Z",
-      "Type": "Enchancement",
+      "Type": "Bug",
       "IssueSummary": "Answer to response quality is generic/irrelevant response"
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "Reporter": "Z",
-      "Type": "Enchancement",
+      "Type": "Bug",
       "IssueSummary": "UX messaging for when images in chat are not supported"
     },
     {
@@ -202,8 +202,18 @@
     },
     {
       "Reporter": "Z",
-      "Type": "Enchancement",
+      "Type": "Bug",
       "IssueSummary": "Inconsistent handling of the same expense-reimbursement question"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Enchancement",
+      "IssueSummary": "Answer quality – generic intro returned in English instead of Chinese"
+    },
+    {
+      "Reporter": "Z",
+      "Type": "Bug",
+      "IssueSummary": "Answer quality – cites a source that doesn’t cover the specific commands, and uses odd italic formatting"
     },
     {
       "Reporter": "Yana Hadzhiyska",
@@ -1151,7 +1161,122 @@
           "Rank": 22
         }
       ]
+    },
+    {
+      "date": "2025-11-15",
+      "leaderboard": [
+        {
+          "Reporter": "Roberto P.",
+          "Points": 50,
+          "Rank": 1
+        },
+        {
+          "Reporter": "Tamar Auber",
+          "Points": 50,
+          "Rank": 2
+        },
+        {
+          "Reporter": "Z",
+          "Points": 49,
+          "Rank": 3
+        },
+        {
+          "Reporter": "Jana Sosnowski",
+          "Points": 36,
+          "Rank": 4
+        },
+        {
+          "Reporter": "Yana Hadzhiyska",
+          "Points": 20,
+          "Rank": 5
+        },
+        {
+          "Reporter": "Chris Wiggins",
+          "Points": 13,
+          "Rank": 6
+        },
+        {
+          "Reporter": "Krishant Lodhia",
+          "Points": 12,
+          "Rank": 7
+        },
+        {
+          "Reporter": "Rocio Cerbon",
+          "Points": 11,
+          "Rank": 8
+        },
+        {
+          "Reporter": "Matt Murphy",
+          "Points": 9,
+          "Rank": 9
+        },
+        {
+          "Reporter": "Erin Anderson",
+          "Points": 8,
+          "Rank": 10
+        },
+        {
+          "Reporter": "Gary Parker",
+          "Points": 6,
+          "Rank": 11
+        },
+        {
+          "Reporter": "Kevin Shaw",
+          "Points": 6,
+          "Rank": 12
+        },
+        {
+          "Reporter": "Nelson Veiga",
+          "Points": 6,
+          "Rank": 13
+        },
+        {
+          "Reporter": "Derek Pascarella",
+          "Points": 4,
+          "Rank": 14
+        },
+        {
+          "Reporter": "Edgar Elias",
+          "Points": 3,
+          "Rank": 15
+        },
+        {
+          "Reporter": "Fran Fernandez",
+          "Points": 3,
+          "Rank": 16
+        },
+        {
+          "Reporter": "Graham McDonough",
+          "Points": 3,
+          "Rank": 17
+        },
+        {
+          "Reporter": "Ivan Velev",
+          "Points": 3,
+          "Rank": 18
+        },
+        {
+          "Reporter": "Karthik Shetty",
+          "Points": 3,
+          "Rank": 19
+        },
+        {
+          "Reporter": "Pawel Kozmic",
+          "Points": 3,
+          "Rank": 20
+        },
+        {
+          "Reporter": "Roberto Esquivel",
+          "Points": 3,
+          "Rank": 21
+        },
+        {
+          "Reporter": "Vladislav Angelov",
+          "Points": 3,
+          "Rank": 22
+        }
+      ]
     }
   ],
-  "lastUpdated": "2025-11-14T23:51:44.337Z"
+  "lastUpdated": "2025-11-15T00:44:33.310Z"
 }
